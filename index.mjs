@@ -2,6 +2,8 @@ import inquirer from "inquirer";
 import { exec } from "child_process";
 import { execFn } from "./execFn.mjs";
 
+const ui = new inquirer.ui.BottomBar();
+
 const questions = [
   {
     type: "input",
@@ -43,4 +45,5 @@ const questions = [
 inquirer
   .prompt(questions)
   .then(answers => exec(execFn(answers.fileName)))
+  .then(() => ui.log.write("✨ All done. Huzzah ✨"))
   .catch(error => console.log("something borked"));
